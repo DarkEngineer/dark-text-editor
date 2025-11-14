@@ -1,0 +1,68 @@
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+}
+
+.json-editor, .preview-area {
+  height: calc(100vh - 120px);
+  overflow: auto;
+}
+
+.json-textarea {
+  width: 100%;
+  font-family: monospace;
+  padding: 12px;
+}
+
+.rendered {
+  padding: 12px;
+}
+
+.rendered img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 12px 0;
+}
+
+.rendered table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.rendered th,
+.rendered td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.rendered pre {
+  background: #f4f4f4;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.rendered code {
+  font-family: monospace;
+}

@@ -1,5 +1,3 @@
-# dark-text-editor
-
 # Angular Material JSON Text Editor
 
 ## Overview

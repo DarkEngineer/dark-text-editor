@@ -1,0 +1,41 @@
+<div class="editor-container">
+  <!-- Toolbar -->
+  <mat-toolbar color="primary" class="toolbar">
+    <span>JSON Text Editor</span>
+    <span class="spacer"></span>
+
+    <button mat-button (click)="addBlock('heading')">Heading</button>
+    <button mat-button (click)="addBlock('paragraph')">Paragraph</button>
+    <button mat-button (click)="addBlock('list')">List</button>
+    <button mat-button (click)="addBlock('image')">Image</button>
+    <button mat-button (click)="addBlock('code')">Code Block</button>
+    <button mat-button (click)="addBlock('table')">Table</button>
+
+    <span class="spacer"></span>
+
+    <button mat-raised-button color="accent" (click)="downloadHtml()">Export HTML</button>
+  </mat-toolbar>
+
+  <div class="content-wrapper">
+    <!-- JSON Editor -->
+    <mat-card class="json-editor">
+      <mat-card-title>JSON Model</mat-card-title>
+      <mat-card-content>
+        <textarea
+          matInput
+          rows="25"
+          [formControl]="form.get('jsonText')"
+          class="json-textarea"
+        ></textarea>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Rendered Output Preview -->
+    <mat-card class="preview-area">
+      <mat-card-title>Rendered Output</mat-card-title>
+      <mat-card-content>
+        <div class="rendered" [innerHTML]="renderedHtml"></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
