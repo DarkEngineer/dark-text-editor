@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Glassmorphism logo for Angular JSON Editor">
+  <defs>
+    <!-- Colour palette (cyan/teal/frost) -->
+    <linearGradient id="g-fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00D1FF"/>
+      <stop offset="0.55" stop-color="#4BE4C9"/>
+      <stop offset="1" stop-color="#A1FFF3"/>
+    </linearGradient>
+
+    <!-- subtle inner gradient for glass plate -->
+    <linearGradient id="g-plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.55"/>
+    </linearGradient>
+
+    <!-- frosted blur -->
+    <filter id="f-blur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- soft shadow -->
+    <filter id="f-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="14" stdDeviation="30" flood-color="#0b5760" flood-opacity="0.12"/>
+    </filter>
+
+    <!-- highlight -->
+    <linearGradient id="g-highlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+
+    <!-- small glass sheen -->
+    <radialGradient id="g-sheen" cx="30%" cy="25%" r="60%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- icon pieces style -->
+    <style type="text/css"><![CDATA[
+      .icon-line { rx:6; ry:6; }
+      .icon-box { rx:10; ry:10; }
+      .caret { fill: #00373a; opacity: 0.95; }
+    ]]></style>
+  </defs>
+
+  <!-- background circle with subtle gradient glow -->
+  <g transform="translate(0,0)">
+    <circle cx="512" cy="512" r="480" fill="url(#g-fill)" opacity="0.96"/>
+    <!-- a soft outer glow ring -->
+    <circle cx="512" cy="512" r="480" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="2"/>
+  </g>
+
+  <!-- frosted glass circular plate -->
+  <g transform="translate(512,512)">
+    <!-- outer blurred block to simulate frosted effect under plate -->
+    <circle cx="0" cy="0" r="300" fill="rgba(255,255,255,0.08)" filter="url(#f-blur)"/>
+    <!-- plate -->
+    <circle cx="0" cy="0" r="260" fill="url(#g-plate)" filter="url(#f-shadow)" />
+    <!-- sheen -->
+    <ellipse cx="-60" cy="-120" rx="170" ry="75" fill="url(#g-sheen)" opacity="0.65" />
+    <!-- subtle stroke -->
+    <circle cx="0" cy="0" r="260" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1.5"/>
+  </g>
+
+  <!-- icon group (nested list + caret) centered on plate -->
+  <g transform="translate(512,512) scale(1)" aria-hidden="true">
+    <!-- left stacked boxes representing list bullets (three boxes) -->
+    <g transform="translate(-120,-60)" opacity="0.98">
+      <!-- box 1 -->
+      <rect class="icon-box" x="0" y="0" width="110" height="40" rx="10" ry="10" fill="#ffffff" fill-opacity="0.95" />
+      <rect x="14" y="10" width="78" height="20" rx="6" ry="6" fill="#00BFCF" opacity="0.95" />
+      <!-- box 2 -->
+      <rect class="icon-box" x="0" y="56" width="110" height="40" rx="10" ry="10" fill="#ffffff" fill-opacity="0.95" />
+      <rect x="14" y="66" width="50" height="20" rx="6" ry="6" fill="#00D1FF" opacity="0.95" />
+      <!-- box 3 -->
+      <rect class="icon-box" x="0" y="112" width="110" height="40" rx="10" ry="10" fill="#ffffff" fill-opacity="0.95" />
+      <rect x="14" y="122" width="90" height="20" rx="6" ry="6" fill="#4BE4C9" opacity="0.95" />
+    </g>
+
+    <!-- right lines for list text (three lines) -->
+    <g transform="translate(-6,-58)">
+      <rect class="icon-line" x="120" y="6" width="190" height="18" rx="8" ry="8" fill="#ffffff" opacity="0.92"/>
+      <rect class="icon-line" x="120" y="62" width="140" height="18" rx="8" ry="8" fill="#ffffff" opacity="0.92"/>
+      <rect class="icon-line" x="120" y="118" width="170" height="18" rx="8" ry="8" fill="#ffffff" opacity="0.92"/>
+    </g>
+
+    <!-- small caret (text cursor) to imply 'editor' -->
+    <g transform="translate(310,-10) rotate(8)">
+      <rect class="caret" x="-6" y="-26" width="10" height="52" rx="2" ry="2"/>
+      <circle cx="-1" cy="28" r="7" fill="#00D1FF" opacity="0.95"/>
+    </g>
+  </g>
+
+  <!-- small label (project acronym) under plate -->
+  <g transform="translate(512,760)" text-anchor="middle" fill="#00373a" font-family="Segoe UI, Roboto, Helvetica, Arial" font-weight="600">
+    <text x="0" y="0" font-size="42">Angular JSON Editor</text>
+    <text x="0" y="44" font-size="20" fill="#00373a" opacity="0.7">nested lists • drag & drop • glass</text>
+  </g>
+</svg>

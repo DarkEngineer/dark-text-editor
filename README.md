@@ -1,66 +1,127 @@
-# dark-text-editor
+Angular 20 Rich Text Editor
+Nested Lists • Drag & Drop • JSON Model • Angular Material
+<p align="center"> <img src="./logo-glass-cyan.svg" width="260" alt="Angular JSON Editor Logo" /> </p> <p align="center"> <strong>A modern, glass-styled rich text editor for Angular 20 with nested lists, drag-and-drop, and JSON serialization.</strong> </p>
+🏷️ Badges
+<p align="center"> <img src="https://img.shields.io/badge/Angular-20-DD0031?logo=angular&logoColor=white" /> <img src="https://img.shields.io/badge/Material%20Design-v17-0081CB?logo=material-design&logoColor=white" /> <img src="https://img.shields.io/badge/CDK-Drag%20and%20Drop-0288D1" /> <img src="https://img.shields.io/badge/TypeScript-5.4-3178C6?logo=typescript&logoColor=white" /> <img src="https://img.shields.io/badge/license-MIT-green" /> </p>
 
-# Angular Material JSON Text Editor
+✨ Features
+📝 Rich Text Formatting
 
-## Overview
+Bold / Italic / Underline (toggle)
 
-This Angular component provides a JSON-driven text editor with support for headings, paragraphs, lists, images, code blocks, and tables. It shows a live HTML preview and allows exporting a full HTML document.
+Multiple marks on the same selection
 
-## Installation
+Inline color styles
 
-1. Ensure your Angular project has Angular Material installed:
+Keyboard shortcuts:
 
-   ```bash
-   ng add @angular/material
-   ```
-2. Copy all `text-editor` component files into `src/app/text-editor/`.
-3. Import `TextEditorModule` into your `AppModule`:
+Ctrl+B bold
 
-   ```ts
-   import { TextEditorModule } from './text-editor/text-editor.module';
+Ctrl+I italic
 
-   @NgModule({
-     imports: [TextEditorModule, ...],
-   })
-   export class AppModule {}
-   ```
-4. Use the component in your template:
+Ctrl+U underline
 
-   ```html
-   <app-text-editor></app-text-editor>
-   ```
+📚 Nested List System
 
-## Features
+Infinite levels of nested lists
 
-* JSON-based document model editable via textarea.
-* Supports:
+Ordered + unordered
 
-  * Heading blocks (`h1`–`h6`)
-  * Paragraphs
-  * Ordered/unordered lists
-  * Images with optional captions
-  * Code blocks with syntax highlighting
-  * Tables with dynamic rows and columns
-* Live HTML preview
-* Export full HTML file (including highlight.js for code)
+Auto-indent using Tab
 
-## Storybook
+Outdent using Shift+Tab
 
-The component includes a Storybook story for visual testing:
+Enter → Start new list item
 
-```bash
-npm run storybook
-```
+⛓️ Drag & Drop (Angular CDK)
 
-## Sample JSON
+Reorder list items
 
-```json
-[
-  { "type": "heading", "content": "Document Title", "level": 2 },
-  { "type": "paragraph", "content": "Intro paragraph" },
-  { "type": "list", "ordered": false, "items": ["Item 1", "Item 2"] },
-  { "type": "image", "src": "https://via.placeholder.com/400", "alt": "Sample", "caption": "Placeholder image" },
-  { "type": "code", "language": "ts", "code": "console.log('Hello');" },
-  { "type": "table", "headers": ["Name", "Age"], "rows": [["Alice", "30"], ["Bob", "27"]] }
-]
-```
+Move between levels
+
+Drag nested subtrees
+
+Smooth Material animations
+
+🔄 Live JSON Serialization
+
+A clean, style-based JSON model (no HTML tags):
+
+{
+  "type": "list",
+  "ordered": false,
+  "items": [
+    {
+      "content": [
+        { "text": "Hello", "bold": true, "italic": true }
+      ],
+      "children": [ ... ]
+    }
+  ]
+}
+
+
+Perfect for:
+
+Saving to backend
+
+Exporting / importing
+
+Real-time collaboration engines
+
+Live updates as you edit
+
+Mirror view of your document structure
+
+💾 Autosave + File Import/Export
+
+Autosave to localStorage
+
+Export JSON
+
+Import JSON
+
+Reload previous session
+
+📦 Installation
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
+npm install
+ng serve
+
+
+Then open:
+
+👉 http://localhost:4200
+
+🛠️ Usage
+Bold / Italic / Underline
+
+Select text
+
+Click toolbar buttons
+
+Or use shortcuts (Ctrl+B, Ctrl+I, Ctrl+U)
+
+Create nested lists
+
+Click bullet/number icon
+
+Press Tab to indent
+
+Shift + Tab to outdent
+
+Reorder
+
+Drag handle on left
+
+Drop anywhere (supports nested drag)
+
+Export / Import JSON
+
+Use toolbar buttons
+
+📄 License
+
+MIT License
+Copyright © 2025

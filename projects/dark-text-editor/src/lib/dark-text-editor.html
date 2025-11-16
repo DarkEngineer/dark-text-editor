@@ -1,41 +1,106 @@
-<div class="editor-container">
-  <!-- Toolbar -->
-  <mat-toolbar color="primary" class="toolbar">
-    <span>JSON Text Editor</span>
-    <span class="spacer"></span>
+<div class="editor-toolbar">
+  <button mat-icon-button (click)="undo()" matTooltip="Undo (Ctrl+Z)">
+    <mat-icon>undo</mat-icon>
+  </button>
+  <button mat-icon-button (click)="redo()" matTooltip="Redo (Ctrl+Y)">
+    <mat-icon>redo</mat-icon>
+  </button>
+  <button mat-icon-button (click)="applyStyle('bold')" matTooltip="Bold (Ctrl+B)">
+    <mat-icon>format_bold</mat-icon>
+  </button>
+  <button mat-icon-button (click)="applyStyle('italic')" matTooltip="Italic (Ctrl+I)">
+    <mat-icon>format_italic</mat-icon>
+  </button>
+  <button mat-icon-button (click)="applyStyle('underline')" matTooltip="Underline (Ctrl+U)">
+    <mat-icon>format_underlined</mat-icon>
+  </button>
+  <button mat-icon-button (click)="applyStyle('h2')" matTooltip="Heading 2">
+    <mat-icon>title</mat-icon>
+  </button>
 
-    <button mat-button (click)="addBlock('heading')">Heading</button>
-    <button mat-button (click)="addBlock('paragraph')">Paragraph</button>
-    <button mat-button (click)="addBlock('list')">List</button>
-    <button mat-button (click)="addBlock('image')">Image</button>
-    <button mat-button (click)="addBlock('code')">Code Block</button>
-    <button mat-button (click)="addBlock('table')">Table</button>
+  <button mat-icon-button [matMenuTriggerFor]="alignMenu" matTooltip="Align">
+    <mat-icon>format_align_center</mat-icon>
+  </button>
+  <mat-menu #alignMenu="matMenu">
+    <button mat-menu-item (click)="applyStyle('align-left')">Left</button>
+    <button mat-menu-item (click)="applyStyle('align-center')">Center</button>
+    <button mat-menu-item (click)="applyStyle('align-right')">Right</button>
+  </mat-menu>
 
-    <span class="spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="colorMenu" matTooltip="Text Color">
+    <mat-icon>palette</mat-icon>
+  </button>
+  <mat-menu #colorMenu="matMenu">
+    <input
+      type="color"
+      (input)="applyStyle('color', $event.target.value)"
+      style="width: 100%; height: 40px; border: none; background: none"
+    />
+  </mat-menu>
 
-    <button mat-raised-button color="accent" (click)="downloadHtml()">Export HTML</button>
-  </mat-toolbar>
+  <button mat-icon-button color="warn" (click)="clear()" matTooltip="Clear">
+    <mat-icon>delete</mat-icon>
+  </button>
+  <button mat-icon-button (click)="download()" matTooltip="Save (Ctrl+S)">
+    <mat-icon>save</mat-icon>
+  </button>
+  <button mat-icon-button (click)="openFile()" matTooltip="Open">
+    <mat-icon>folder_open</mat-icon>
+  </button>
+  <input #fileInput type="file" accept="application/json" (change)="onFileChange($event)" hidden />
+</div>
 
-  <div class="content-wrapper">
-    <!-- JSON Editor -->
-    <mat-card class="json-editor">
-      <mat-card-title>JSON Model</mat-card-title>
-      <mat-card-content>
-        <textarea
-          matInput
-          rows="25"
-          [formControl]="form.get('jsonText')"
-          class="json-textarea"
-        ></textarea>
-      </mat-card-content>
-    </mat-card>
+<div class="container">
+  <div class="editor-pane">
+    <div
+      #editor
+      class="editor"
+      contenteditable="true"
+      spellcheck="true"
+      (input)="onEditorInput()"
+    ></div>
+  </div>
 
-    <!-- Rendered Output Preview -->
-    <mat-card class="preview-area">
-      <mat-card-title>Rendered Output</mat-card-title>
-      <mat-card-content>
-        <div class="rendered" [innerHTML]="renderedHtml"></div>
-      </mat-card-content>
-    </mat-card>
+  <div class="json-pane">
+    <div class="json-header">JSON Preview</div>
+    <pre>{{ jsonPreview }}</pre>
   </div>
 </div>
+
+<!-- Rendered Material view (live) -->
+<section class="rendered-view">
+  <h3>Rendered View</h3>
+  @for (item of jsonData; track item) {
+  <ng-container>
+    <ng-container>
+      @switch (item.type) { @case ('heading') {
+      <h2>{{ item.content }}</h2>
+      } @case ('card') {
+      <mat-card class="mb-2">
+        @if (item.title) {
+        <mat-card-header>
+          <mat-card-title>{{ item.title }}</mat-card-title>
+        </mat-card-header>
+        }
+        <mat-card-content>{{ item.content }}</mat-card-content>
+      </mat-card>
+      } @case ('chip') {
+      <div style="margin: 6px 0">
+        <mat-chip-set>
+          <mat-chip>{{ item.content }}</mat-chip>
+        </mat-chip-set>
+      </div>
+      } @case ('divider') {
+      <mat-divider class="mb-2"></mat-divider>
+      } @case ('paragraph') {
+      <p>{{ item.content }}</p>
+      } @default {
+      <p>{{ item.content }}</p>
+      } }
+    </ng-container>
+  </ng-container>
+  }
+</section>
+
+<p class="hint">Rendered view updates live from JSON • Autosaves every 2s</p>
+```

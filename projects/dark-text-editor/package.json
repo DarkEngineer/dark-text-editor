@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^20.3.0",
-    "@angular/core": "^20.3.0"
+    "@angular/core": "^20.3.0",
+    "@angular/material": "^20.2.13"
   },
   "dependencies": {
-    "@angular/material": "^20.2.13",
     "tslib": "^2.3.0"
   },
   "sideEffects": false
