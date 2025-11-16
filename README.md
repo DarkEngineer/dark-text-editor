@@ -1,10 +1,11 @@
 Angular 20 Rich Text Editor
 Nested Lists • Drag & Drop • JSON Model • Angular Material
+
 <p align="center"> <img src="./logo-glass-cyan.svg" width="260" alt="Angular JSON Editor Logo" /> </p> <p align="center"> <strong>A modern, glass-styled rich text editor for Angular 20 with nested lists, drag-and-drop, and JSON serialization.</strong> </p>
 🏷️ Badges
 <p align="center"> <img src="https://img.shields.io/badge/Angular-20-DD0031?logo=angular&logoColor=white" /> <img src="https://img.shields.io/badge/Material%20Design-v17-0081CB?logo=material-design&logoColor=white" /> <img src="https://img.shields.io/badge/CDK-Drag%20and%20Drop-0288D1" /> <img src="https://img.shields.io/badge/TypeScript-5.4-3178C6?logo=typescript&logoColor=white" /> <img src="https://img.shields.io/badge/license-MIT-green" /> </p>
 
-✨ Features
+# ✨ Features
 📝 Rich Text Formatting
 
 Bold / Italic / Underline (toggle)
@@ -83,7 +84,7 @@ Import JSON
 
 Reload previous session
 
-📦 Installation
+# 📦 Installation
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
 npm install
@@ -94,7 +95,7 @@ Then open:
 
 👉 http://localhost:4200
 
-🛠️ Usage
+# 🛠️ Usage
 Bold / Italic / Underline
 
 Select text
