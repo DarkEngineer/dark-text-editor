@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DarkTextEditor } from './dark-text-editor';
 import { HeadingBlock } from '../public-api';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 
 describe('TextEditorComponent', () => {
@@ -14,15 +15,16 @@ describe('TextEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DarkTextEditor],
       imports: [
         ReactiveFormsModule,
         FormsModule,
         MatToolbarModule,
         MatButtonModule,
         MatInputModule,
-        MatCardModule
+        MatCardModule,
+        DarkTextEditor
       ],
+      providers: [provideZonelessChangeDetection()]
     }).compileComponents();
   });
 
