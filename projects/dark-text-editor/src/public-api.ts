@@ -11,3 +11,4 @@ export * from './lib/types/dark-text-editor.type';
  * Services
  */
 export * from './lib/utils/utils-service';
+export * from './lib/parser/parser-service';

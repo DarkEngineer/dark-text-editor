@@ -26,10 +26,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { debounceTime } from 'rxjs';
-import { UtilsService } from '../public-api';
-import {
-  BaseBlock
-} from './types/dark-text-editor.type';
+import { ParserService, UtilsService } from '../public-api';
+import { BaseBlock } from './types/dark-text-editor.type';
 
 interface HistoryState {
   content: any[];
@@ -70,6 +68,7 @@ export class DarkTextEditor implements OnInit {
 
   private readonly nnfb = inject(FormBuilder).nonNullable;
   private readonly utilsService = inject(UtilsService);
+  private readonly parserService = inject(ParserService);
   private readonly sanitizer = inject(DomSanitizer);
   form = this.nnfb.group<DarkEditorFormGroup>({
     jsonText: this.nnfb.control(''),
@@ -177,10 +176,8 @@ export class DarkTextEditor implements OnInit {
     this.saveHistory();
   }
 
-  onEditorInput() {
-    this.updateJSONPreview();
-    this.saveHistoryDebounced();
-  }
+
+
   private saveHistoryTimer: any = null;
   private saveHistoryDebounced() {
     if (this.saveHistoryTimer) clearTimeout(this.saveHistoryTimer);
@@ -188,6 +185,11 @@ export class DarkTextEditor implements OnInit {
       this.saveHistory();
       this.saveHistoryTimer = null;
     }, 800);
+  }
+
+  onEditorInput() {
+    this.updateJSONPreview();
+    this.saveHistoryDebounced();
   }
 
   openFile() {
@@ -247,7 +249,7 @@ export class DarkTextEditor implements OnInit {
   }
 
   private updateJSONPreview() {
-    //this.jsonPreview = JSON.stringify(this.toJSON(), null, 2);
+    this.form.controls.jsonPreview.setValue(JSON.stringify(this.toJSON(), null, 2));
   }
 
   clear() {
@@ -258,22 +260,10 @@ export class DarkTextEditor implements OnInit {
 
   toJSON(): any[] {
     const elements = Array.from(this.editor().nativeElement.childNodes);
-    console.log(elements);
     return elements.map((node) => {
-      if (node.nodeType === Node.TEXT_NODE) return { type: 'text', content: node.textContent };
-      if (node.nodeName === 'H2') return { type: 'heading', level: 2, content: node.textContent };
-      const el = node as HTMLElement;
-      const style = {
-        bold: el.style.fontWeight === 'bold',
-        italic: el.style.fontStyle === 'italic',
-        underline: el.style.textDecoration === 'underline',
-        color: el.style.color || null,
-      };
-      return { type: 'paragraph', content: el.innerText, style };
+      return this.parserService.parseFromHtmlBlock(node);
     });
   }
-
-  parseBlock(baseblock: ChildNode) {}
 
   fromJSON(data: any[]) {
     this.editor().nativeElement.innerHTML = data
@@ -303,8 +293,9 @@ export class DarkTextEditor implements OnInit {
 
     return this.form.controls.jsonBlocks.value
       .map((block) => {
-        return this.utilsService.parseJsonBlocks(block);
-      }).join('\n');
+        return this.parserService.parseFromJsonBlocks(block);
+      })
+      .join('\n');
   }
 
   updateRenderedHtml() {
@@ -319,7 +310,7 @@ export class DarkTextEditor implements OnInit {
     }
   }
 
-  /*
+  
   onFileChange(ev: Event) {
     const input = ev.target as HTMLInputElement;
     if (!input.files?.length) return;
@@ -329,7 +320,7 @@ export class DarkTextEditor implements OnInit {
       try {
         const json = JSON.parse(String(reader.result || '[]'));
         this.fromJSON(json);
-        this.jsonPreview = JSON.stringify(json, null, 2);
+        this.form.controls.jsonPreview.setValue(JSON.stringify(json, null, 2));
         this.saveHistory();
       } catch {
         alert('Invalid JSON file');
@@ -338,5 +329,5 @@ export class DarkTextEditor implements OnInit {
     reader.readAsText(file);
     input.value = '';
   }
-    */
+  
 }
