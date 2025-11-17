@@ -1,68 +1,55 @@
-.editor-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+:root {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
-
 .toolbar {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1;
 }
-
-.spacer {
-  flex: 1 1 auto;
+.editor-toolbar {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0;
+  flex-wrap: wrap;
 }
-
-.content-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  padding: 16px;
+.container {
+  display: flex;
+  gap: 12px;
 }
-
-.json-editor, .preview-area {
-  height: calc(100vh - 120px);
+.editor-pane,
+.json-pane {
+  flex: 1;
+  max-height: 440px;
   overflow: auto;
 }
-
-.json-textarea {
-  width: 100%;
-  font-family: monospace;
-  padding: 12px;
-}
-
-.rendered {
-  padding: 12px;
-}
-
-.rendered img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 12px 0;
-}
-
-.rendered table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 12px 0;
-}
-
-.rendered th,
-.rendered td {
+.editor {
+  min-height: 320px;
   border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
-}
-
-.rendered pre {
-  background: #f4f4f4;
+  border-radius: 8px;
   padding: 12px;
-  border-radius: 4px;
-  overflow-x: auto;
+  background: #fff;
+  overflow-y: auto;
 }
-
-.rendered code {
-  font-family: monospace;
+.json-pane {
+  background: #f7f9fc;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
+.rendered-view {
+  margin-top: 18px;
+}
+.mb-2 {
+  margin-bottom: 12px;
+}
+.hint {
+  color: #666;
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+.json-header {
+  font-weight: 600;
+  margin-bottom: 8px;
 }
