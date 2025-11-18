@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DarkTextEditor } from './dark-text-editor';
-import { HeadingBlock } from '../public-api';
+import { BaseBlock, HeadingBlock } from '../public-api';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 
@@ -39,12 +39,12 @@ describe('TextEditorComponent', () => {
   });
 
   it('should parse valid JSON into model', () => {
-    const testJson = [
+    const testJson: BaseBlock[] = [
       { type: 'paragraph', content: 'Test content' }
     ];
 
-    component.form.get('jsonText')?.setValue(JSON.stringify(testJson));
-    component.form.get('jsonText')?.updateValueAndValidity();
+    component.form.get('jsonBlocks')?.setValue(testJson);
+    component.form.get('jsonBlocks')?.updateValueAndValidity();
 
     expect(component.form.controls.jsonBlocks.value.length).toBe(1);
     expect(component.form.controls.jsonBlocks.value[0].type).toBe('paragraph');
