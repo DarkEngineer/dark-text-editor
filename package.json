@@ -1,6 +1,9 @@
 {
   "name": "@darkengineer/dark-text-editor",
   "version": "0.0.3",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,7 +24,7 @@
       }
     ]
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/cdk": "~20.2.13",
     "@angular/common": "^20.3.0",
