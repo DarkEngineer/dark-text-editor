@@ -1,11 +1,12 @@
 {
-  "name": "dark-text-editor-showcase",
-  "version": "0.0.0",
+  "name": "@darkengineer/dark-text-editor",
+  "version": "0.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "build-lib": "ng build dark-text-editor",
     "test": "ng test"
   },
   "prettier": {
